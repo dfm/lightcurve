@@ -1,0 +1,40 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module _periodogram ! in 
+    interface  ! in :_periodogram
+        subroutine get_chi(w,t,f,ferr,n,order,b,chi,info) ! in :_periodogram:periodogram.f90
+            double precision intent(in) :: w
+            double precision dimension(n),intent(in) :: t
+            double precision dimension(n),intent(in),depend(n) :: f
+            double precision dimension(n),intent(in),depend(n) :: ferr
+            integer, optional,intent(in),check(len(t)>=n),depend(t) :: n=len(t)
+            integer intent(in) :: order
+            double precision dimension(2 * order + 1),intent(out),depend(order) :: b
+            double precision dimension(n),intent(out),depend(n) :: chi
+            integer intent(out) :: info
+        end subroutine get_chi
+        subroutine get_chi2(w,t,f,ferr,n,order,b,chi2,info) ! in :_periodogram:periodogram.f90
+            double precision intent(in) :: w
+            double precision dimension(n),intent(in) :: t
+            double precision dimension(n),intent(in),depend(n) :: f
+            double precision dimension(n),intent(in),depend(n) :: ferr
+            integer, optional,intent(in),check(len(t)>=n),depend(t) :: n=len(t)
+            integer intent(in) :: order
+            double precision dimension(2 * order + 1),intent(out),depend(order) :: b
+            double precision intent(out) :: chi2
+            integer intent(out) :: info
+        end subroutine get_chi2
+        subroutine solve_square(n,a,b,lwork,liwork,info) ! in :_periodogram:periodogram.f90
+            integer, optional,check(shape(a,0)==n),depend(a) :: n=shape(a,0)
+            double precision dimension(n,n) :: a
+            double precision dimension(n),depend(n) :: b
+            integer :: lwork
+            integer :: liwork
+            integer :: info
+        end subroutine solve_square
+    end interface 
+end python module _periodogram
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/

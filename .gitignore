@@ -1,0 +1,6 @@
+.DS_Store
+*.pyc
+*.so
+*-f2pywrappers.f
+*module.c
+build
